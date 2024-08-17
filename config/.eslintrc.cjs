@@ -1,4 +1,12 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const path = require('path');
+
 module.exports = {
+  "env": {
+    "browser": true,
+    "amd": true,
+    "node": true
+  },
   extends: [
     'eslint:recommended',
     'plugin:react/recommended',
@@ -14,9 +22,15 @@ module.exports = {
     },
     'import/resolver': {
       node: {
-        paths: ['src'],
+        paths: [path.resolve(__dirname, '../src')],
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
       },
+      alias: {
+        map: [
+          ["~", path.resolve(__dirname, '../src')],
+        ],
+        extensions: [".js", ".jsx", ".ts", ".tsx"]
+      }
     },
   },
   rules: {
@@ -27,6 +41,7 @@ module.exports = {
     "react/display-name": "off",
     "@typescript-eslint/ban-types": "off",
     "import/named": "off",
-    "react-hooks/exhaustive-deps": "warn"
+    "react-hooks/exhaustive-deps": "warn",
+    "react/prop-types": "off"
   },
 };
