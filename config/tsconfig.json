@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "baseUrl": "../",
     "target": "ES2020",
     "useDefineForClassFields": true,
     "lib": ["ES2020", "DOM", "DOM.Iterable", "WebWorker"],
@@ -24,5 +23,5 @@
   "include": ["../src", "vite-env.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }],
   "extends": "./tsconfig.paths.json",
-  "exclude": ["node_modules"]
+  "exclude": ["../node_modules"]
 }
