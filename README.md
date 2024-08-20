@@ -22,3 +22,4 @@
    #### Utilizando Json Web Server em: `http://localhost:3000/`
 
   #### Estrutura de pastas do projeto
+![Screenshot from 2024-08-19 22-00-34](https://github.com/user-attachments/assets/1731f3a6-6e01-4897-964c-62ce642789b3)
