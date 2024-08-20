@@ -1,9 +1,9 @@
 ## Esse projeto foi criado para o [Caju Front End Teste](https://github.com/caju-beneficios/caju-front-teste-1), para executar precisa de poucos passos:
 
-1. **Clonar o [repositório](https://github.com/rafabiassio/caju-front-test)**
+1. **Clonar o [repositório](https://github.com/rafabiassio/caju-front-teste-1)**
 
    ```shell
-   git clone https://github.com/rafabiassio/caju-front-test
+   git clone https://github.com/rafabiassio/caju-front-teste-1
    ```
 
 2. **Instalar as dependências**
