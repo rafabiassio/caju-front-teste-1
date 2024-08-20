@@ -3,13 +3,12 @@ import { formatISOtoLocale } from "~/utils/formatters";
 import TextField from "../TextField";
 
 type DateFieldProps = {
-  value: string;
   label?: string;
   error?: string;
   handleChange: (value: string) => void;
 } & InputHTMLAttributes<any>;
 
-const DateField = ({ value, handleChange, ...props }: DateFieldProps) => {
+const DateField = ({ handleChange, ...props }: DateFieldProps) => {
   const [localValue, setLocalValue] = useState('');
 
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
