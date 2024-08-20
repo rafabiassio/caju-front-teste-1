@@ -20,3 +20,5 @@
 
    ### A Aplicação está em: `http://localhost:3001/`
    #### Utilizando Json Web Server em: `http://localhost:3000/`
+
+  #### Estrutura de pastas do projeto
