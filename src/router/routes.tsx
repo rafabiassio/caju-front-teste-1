@@ -1,7 +1,8 @@
+import { lazy } from "react";
 import { RouterType } from "~/types/router.types";
-import DashboardPage from "~/pages/Dashboard";
-import NewUserPage from "~/pages/NewUser";
-import { DashboardProvider } from '~/context/DashboardContext';
+
+const DashboardPage = lazy(() => import('~/pages/Dashboard'));
+const NewUserPage = lazy(() => import('~/pages/NewUser'));
 
 export const ROUTES = {
   dashboard: '/dashboard',
@@ -14,11 +15,7 @@ const pageRoutes: RouterType[] = [
   {
     title: "Dashboard",
     path: ROUTES.dashboard,
-    children: (
-      <DashboardProvider>
-        <DashboardPage />
-      </DashboardProvider>
-    )
+    children: <DashboardPage />
   },
   {
     title: "Novo Usuário",

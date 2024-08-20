@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Container = styled.div`
+export const StyledContainer = styled.div`
   padding: 24px;
   display: flex;
   flex-direction: column;

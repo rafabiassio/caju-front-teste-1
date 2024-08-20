@@ -1,7 +1,9 @@
-import Collumns from "./components/Columns";
-import * as S from "./styles";
+import { Suspense } from "react";
 import SearchBar from "./components/Searchbar";
-import { useDashboardContext } from '~/context/DashboardContext';
+import Collumns from "./components/Columns";
+import Loader from "~/components/Loader";
+import { DashboardProvider, useDashboardContext } from '~/context/DashboardContext';
+import { StyledContainer } from "./styles";
 
 const DashboardPage = () => {
   const {
@@ -11,11 +13,19 @@ const DashboardPage = () => {
   } = useDashboardContext();
 
   return (
-    <S.Container>
-      <SearchBar handleCpfFilter={handleCpfFilter} refetch={handleRefetch} />
-      <Collumns registrations={registrationsData} />
-    </S.Container>
+    <Suspense fallback={<Loader />}>
+      <StyledContainer>
+        <SearchBar handleCpfFilter={handleCpfFilter} refetch={handleRefetch} />
+        <Collumns registrations={registrationsData} />
+      </StyledContainer>
+    </Suspense>
   );
 };
 
-export default DashboardPage;
+const DashboardPageWithProvider = () => (
+  <DashboardProvider>
+    <DashboardPage />
+  </DashboardProvider>
+)
+
+export default DashboardPageWithProvider;

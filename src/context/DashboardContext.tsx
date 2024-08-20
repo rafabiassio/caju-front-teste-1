@@ -6,20 +6,23 @@ import useFetch from '~/hooks/use-fetch';
 import useUpdate from '~/hooks/use-update';
 import useDelete from '~/hooks/use-delete';
 import useToast from '~/hooks/use-toast';
+import { useLoaderContext } from '~/hooks/use-loader';
 
-interface DashboardContextType {
+interface DashboardProvider {
+  children: React.ReactNode
+}
+interface DashboardContext {
   registrationsData?: Registration[];
-  loading: boolean;
   handleCpfFilter: (cpfValue: string) => void;
   handleRefetch: () => void;
   sendUpdateData: (id: RegistrationId, requestData: Registration) => void;
   sendDeleteData: (id: RegistrationId) => void;
 }
 
-const DashboardContext = createContext<DashboardContextType | undefined>(undefined);
+const DashboardContext = createContext<DashboardContext | undefined>(undefined);
 
-export const DashboardProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [loading, setLoading] = useState(false)
+export const DashboardProvider = ({ children }: DashboardProvider) => {
+  const { showLoader, hideLoader } = useLoaderContext();
   const [cpfFilter, setCpfFilter] = useState({ filter: 'cpf', value: '' });
   const { data: registrationsData, error: fetchError, loading: fetchLoading, refetch } = useFetch<Registration[]>('registrations', cpfFilter)
   const { sendUpdateData, responseData: updateResponseData, error: updateError, loading: updateLoading } = useUpdate<Registration>('registrations');
@@ -28,9 +31,10 @@ export const DashboardProvider: React.FC<{ children: React.ReactNode }> = ({ chi
 
   useEffect(() => {
     if (fetchLoading || updateLoading || deleteLoading) {
-      setLoading(true)
+      showLoader()
+    } else {
+      hideLoader()
     }
-    setLoading(false)
   }, [fetchLoading, updateLoading, deleteLoading])
 
   const handleRefetch = useCallback(() => {
@@ -86,7 +90,6 @@ export const DashboardProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   return (
     <DashboardContext.Provider value={{
       registrationsData,
-      loading,
       handleCpfFilter,
       handleRefetch,
       sendUpdateData,
@@ -97,7 +100,7 @@ export const DashboardProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   );
 };
 
-export const useDashboardContext = (): DashboardContextType => {
+export const useDashboardContext = (): DashboardContext => {
   const context = useContext(DashboardContext);
   if (context === undefined) {
     throw new Error('DashboardProvider faltante');
