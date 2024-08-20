@@ -1,3 +1,6 @@
+import { parse, isValid } from 'date-fns';
+
+
 const isValidCpf = (cpf: string): boolean => {
   cpf = cpf.replace(/[^\d]+/g, '');
   if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) return false;
@@ -21,6 +24,16 @@ const isValidCpf = (cpf: string): boolean => {
   return true;
 };
 
+const isValidDate = (dateValue: string): boolean => {
+  if (!dateValue) {
+    return false;
+  }
+  const parsedDate = parse(dateValue, 'dd/MM/yyyy', new Date());
+
+  return isValid(parsedDate);
+};
+
 export {
-  isValidCpf
+  isValidCpf,
+  isValidDate
 }

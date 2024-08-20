@@ -58,10 +58,10 @@ export const DashboardProvider = ({ children }: DashboardProvider) => {
   }, [registrationsData, fetchError]);
 
   useEffect(() => {
-    if (fetchError && fetchError.message) {
+    if (fetchError?.message) {
       notifyError(fetchError.message);
     }
-  }, [fetchError, notifyError]);
+  }, [fetchError]);
 
   useEffect(() => {
     if (updateResponseData && !updateError) {
@@ -70,7 +70,7 @@ export const DashboardProvider = ({ children }: DashboardProvider) => {
   }, [updateResponseData, updateError])
 
   useEffect(() => {
-    if (updateError && updateError.message) {
+    if (updateError?.message) {
       notifyError(updateError.message);
     }
   }, [updateError]);
@@ -82,7 +82,7 @@ export const DashboardProvider = ({ children }: DashboardProvider) => {
   }, [deleteResponseData, deleteError])
 
   useEffect(() => {
-    if (deleteError && deleteError.message) {
+    if (deleteError?.message) {
       notifyError(deleteError.message);
     }
   }, [deleteError]);

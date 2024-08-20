@@ -2,21 +2,21 @@ import { useCallback, useState } from 'react';
 import apiClient from '~/api/apiClient';
 import { ErrorType, handleApiError } from '~/utils/errorHandling';
 
-const useUpdate = <T>(url: string) => {
+const usePost = <T>(url: string) => {
   const [response, setResponse] = useState<T>();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<ErrorType | null>(null);
 
-  const updateData = useCallback(async (id: string, requestData: T) => {
+  const postData = useCallback(async (requestData: T) => {
     setLoading(true);
     setError(null);
 
     try {
-      const { data: response } = await apiClient.put(`${url}/${id}`, JSON.stringify(requestData));
+      const { data: response } = await apiClient.post(url, JSON.stringify(requestData));
       setResponse(response);
     } catch (error) {
-      const apiError = handleApiError(error)
-      setError(apiError)
+      const apiError = handleApiError(error);
+      setError(apiError);
     } finally {
       setLoading(false);
     }
@@ -26,8 +26,8 @@ const useUpdate = <T>(url: string) => {
     responseData: response,
     loading,
     error,
-    sendUpdateData: updateData
+    sendPostData: postData
   };
 };
 
-export default useUpdate;
+export default usePost;

@@ -1,6 +1,6 @@
 import { StyledHeader } from "./styles";
 
-const Header: React.FC = () => {
+const Header = () => {
   return (
     <StyledHeader>
       <h1>Caju Front Teste</h1>

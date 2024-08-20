@@ -1,4 +1,4 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, startTransition } from "react";
 import { HiRefresh } from "react-icons/hi";
 import { useHistory } from "react-router-dom";
 import * as Yup from 'yup';
@@ -37,19 +37,17 @@ const SearchBar = ({ handleCpfFilter, refetch }: SearchBarProps) => {
   });
 
   const goToNewAdmissionPage = () => {
-    history.push(ROUTES.newUser);
+    startTransition(() => {
+      history.push(ROUTES.newUser);
+    });
   };
 
   const handleChangeCpfValue = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     const formattedCpf = formatCpf(value)
-    const shouldValidate = formattedCpf.length === 14
 
-    setValue('cpf', formattedCpf, { shouldValidate })
+    setValue('cpf', formattedCpf)
 
-    if (!shouldValidate) {
-      clearErrors()
-    }
     handleCpfFilter(formattedCpf)
   }
 
@@ -63,7 +61,7 @@ const SearchBar = ({ handleCpfFilter, refetch }: SearchBarProps) => {
             {...field}
             placeholder="Digite seu CPF para filtrar"
             maxLength={14}
-            error={errors.cpf && errors.cpf.message}
+            error={errors.cpf?.message}
             onChange={handleChangeCpfValue}
           />
         )}
@@ -72,7 +70,7 @@ const SearchBar = ({ handleCpfFilter, refetch }: SearchBarProps) => {
         <IconButton aria-label="refetch">
           <HiRefresh onClick={refetch} />
         </IconButton>
-        <Button onClick={() => goToNewAdmissionPage()}>Nova Admissão</Button>
+        <Button onClick={goToNewAdmissionPage}>Nova Admissão</Button>
       </Actions>
     </StyledContainer>
   );

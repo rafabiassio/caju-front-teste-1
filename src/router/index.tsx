@@ -1,8 +1,8 @@
 import { HashRouter, Redirect, Route, Switch } from "react-router-dom";
-import pageRoutes, { DEFAULT_ROUTE } from "./routes";
 import { RouterType } from "~/types/router.types";
+import pageRoutes, { DEFAULT_ROUTE } from "./routes";
 
-const Router: React.FC = () => {
+const Router = () => {
   const routes = pageRoutes.map(({ title, path, children }: RouterType) => {
     return <Route exact key={title} path={path}>
       {children}

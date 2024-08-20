@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const _IconButtonStyled = styled.button`
+export const StyledIconButton = styled.button`
   cursor: pointer;
   border: 2px solid #64a98c;
   width: fit-content;
@@ -21,8 +21,8 @@ type IconButtonProps = {
 
 export const IconButton = (props: IconButtonProps) => {
   return (
-    <_IconButtonStyled {...props}>
+    <StyledIconButton {...props}>
       {props.children}
-    </_IconButtonStyled>
+    </StyledIconButton>
   );
 };
