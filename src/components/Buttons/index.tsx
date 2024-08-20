@@ -1,4 +1,20 @@
 import styled from "styled-components";
+import { RegistrationStatus } from "~/types/registration.types";
+
+const statusColors = {
+  [RegistrationStatus.REVIEW]: {
+    backgroundColor: "#ff8858",
+    color: "#fff",
+  },
+  [RegistrationStatus.APPROVED]: {
+    backgroundColor: "rgb(155, 229, 155)",
+    color: "#000",
+  },
+  [RegistrationStatus.REPROVED]: {
+    backgroundColor: "rgb(255, 145, 154)",
+    color: "#000",
+  },
+};
 
 const Button = styled.button`
   outline: none;
@@ -16,17 +32,14 @@ const Button = styled.button`
   font-weight: 600;
 `;
 
-export const ButtonSmall = styled.button<{
-  bgcolor?: string;
-  color?: string;
-}>`
+export const ButtonSmall = styled.button<{ status: RegistrationStatus }>`
   font-size: 12px;
   outline: none;
   border-radius: 4px;
   border: none;
   padding: 4px 16px;
-  background-color: ${(props) => props.bgcolor ?? 'none'};
-  color: ${(props) => props.color ?? "#000"};
+  background-color: ${({ status }) => statusColors[status]?.backgroundColor ?? 'none'};
+  color: ${({ status }) => statusColors[status]?.color ?? "#000"};
   cursor: pointer;
 `;
 

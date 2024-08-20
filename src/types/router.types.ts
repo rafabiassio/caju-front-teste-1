@@ -1,5 +1,5 @@
 export interface RouterType {
   title: string;
   path: string;
-  element: React.ComponentType;
+  children: React.ReactNode;
 }

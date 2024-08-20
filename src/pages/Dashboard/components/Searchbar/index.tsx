@@ -9,7 +9,7 @@ import { IconButton } from "~/components/Buttons/IconButton";
 import TextField from "~/components/TextField";
 import { ROUTES } from "~/router/routes";
 import { isValidCpf } from "~/utils/validators";
-import { formatCpf } from "~/utils/formatters";
+import { formatCpf, getOnlyNumbers } from "~/utils/formatters";
 import { StyledContainer, Actions } from "./styles";
 
 interface SearchBarProps {
@@ -18,14 +18,12 @@ interface SearchBarProps {
 }
 
 interface CPFInput {
-  cpf: string;
+  cpf?: string;
 }
 
 const schema = Yup.object().shape({
   cpf: Yup.string()
-    .required('CPF é obrigatório')
-    .min(14, 'CPF inválido')
-    .test('validate-cpf', 'CPF inválido', value => isValidCpf(value || '')),
+    .test('validate-cpf', 'CPF inválido', value => !value || (getOnlyNumbers(value || '').length === 11 && isValidCpf(value || ''))),
 });
 
 const SearchBar = ({ handleCpfFilter, refetch }: SearchBarProps) => {
@@ -52,9 +50,7 @@ const SearchBar = ({ handleCpfFilter, refetch }: SearchBarProps) => {
     if (!shouldValidate) {
       clearErrors()
     }
-    if (isValidCpf(formattedCpf)) {
-      handleCpfFilter(formattedCpf)
-    }
+    handleCpfFilter(formattedCpf)
   }
 
   return (
@@ -65,7 +61,7 @@ const SearchBar = ({ handleCpfFilter, refetch }: SearchBarProps) => {
         render={({ field }) => (
           <TextField
             {...field}
-            placeholder="Digite seu CPF"
+            placeholder="Digite seu CPF para filtrar"
             maxLength={14}
             error={errors.cpf && errors.cpf.message}
             onChange={handleChangeCpfValue}

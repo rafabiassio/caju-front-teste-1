@@ -1,6 +1,6 @@
 import { StyledColumn, StyledContainer, StyledContent, StyledTitle } from "./styles";
-import RegistrationCard from "../RegistrationCard";
 import { Registration, RegistrationStatus } from "~/types/registration.types";
+import RegistrationCard from "../RegistrationCard";
 
 type CollumnsProps = {
   registrations?: Registration[];

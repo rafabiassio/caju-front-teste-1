@@ -7,12 +7,12 @@ const useDelete = (url: string) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<ErrorType | null>(null);
 
-  const deleteData = useCallback(async () => {
+  const deleteData = useCallback(async (id: string) => {
     setLoading(true);
     setError(null);
 
     try {
-      const { data: responseData } = await apiClient.delete(url);
+      const { data: responseData } = await apiClient.delete(`${url}/${id}`);
       setResponse(responseData);
     } catch (error) {
       const apiError = handleApiError(error);

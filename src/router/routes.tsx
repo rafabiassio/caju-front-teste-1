@@ -1,6 +1,7 @@
 import { RouterType } from "~/types/router.types";
 import DashboardPage from "~/pages/Dashboard";
 import NewUserPage from "~/pages/NewUser";
+import { DashboardProvider } from '~/context/DashboardContext';
 
 export const ROUTES = {
   dashboard: '/dashboard',
@@ -13,12 +14,16 @@ const pageRoutes: RouterType[] = [
   {
     title: "Dashboard",
     path: ROUTES.dashboard,
-    element: DashboardPage
+    children: (
+      <DashboardProvider>
+        <DashboardPage />
+      </DashboardProvider>
+    )
   },
   {
     title: "Novo Usuário",
     path: ROUTES.newUser,
-    element: NewUserPage
+    children: <NewUserPage />
   },
 ];
 

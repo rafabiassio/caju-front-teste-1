@@ -7,12 +7,12 @@ const useUpdate = <T>(url: string) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<ErrorType | null>(null);
 
-  const updateData = useCallback(async (requestData: T) => {
+  const updateData = useCallback(async (id: string, requestData: T) => {
     setLoading(true);
     setError(null);
 
     try {
-      const { data: response } = await apiClient.put(url, requestData);
+      const { data: response } = await apiClient.put(`${url}/${id}`, requestData);
       setResponse(response);
     } catch (error) {
       const apiError = handleApiError(error)

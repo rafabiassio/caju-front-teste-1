@@ -3,8 +3,10 @@ import pageRoutes, { DEFAULT_ROUTE } from "./routes";
 import { RouterType } from "~/types/router.types";
 
 const Router: React.FC = () => {
-  const routes = pageRoutes.map(({ title, path, element }: RouterType) => {
-    return <Route exact key={title} path={path} component={element} />;
+  const routes = pageRoutes.map(({ title, path, children }: RouterType) => {
+    return <Route exact key={title} path={path}>
+      {children}
+    </Route>;
   });
 
   return (
